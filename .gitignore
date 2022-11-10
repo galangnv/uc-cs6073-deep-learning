@@ -1,2 +1,5 @@
-# ignore large data directories
+# large data directories
 */data
+
+# Mac files
+*/.DS_Store
