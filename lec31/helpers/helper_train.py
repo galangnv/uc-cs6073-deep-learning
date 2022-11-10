@@ -31,8 +31,8 @@ def train_cvae(
 
             # ********** Compute Loss **********
             kl_divergence = -0.5 * torch.sum(1 + z_log_var - z_mean**2 - torch.exp(z_log_var), axis=1)
-            kl_divergence = kl_divergence.mean()    # Average over entire batch
             batch_size = kl_divergence.size(0)
+            kl_divergence = kl_divergence.mean()    # Average over entire batch
 
             pixelwise = F.mse_loss(decoded, images, reduction='none')
             pixelwise = pixelwise.view(batch_size, -1).sum(axis=1)
