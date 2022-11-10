@@ -41,6 +41,7 @@ def train_cvae(
             loss = reconstruction_term_weight * pixelwise + kl_divergence
 
             # ********** Backpropagation **********
+            optimizer.zero_grad()
             loss.backward()
 
             # ********** Update Parameters **********
