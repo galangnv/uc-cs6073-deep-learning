@@ -1,5 +1,6 @@
 # large data directories
 */data
+*/saved_data
 
 # Mac files
-*/.DS_Store
+.DS_Store
