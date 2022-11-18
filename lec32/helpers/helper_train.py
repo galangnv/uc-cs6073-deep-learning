@@ -108,12 +108,12 @@ def train_gan(
             real_loss = F.binary_cross_entropy_with_logits(real_predictions, real_labels)
 
             # Discriminator loss on fake images
-            fake_predictions = model.discriminator_forward(fake_images.detach()).view(-1)
+            fake_predictions = model.discriminator_forward(fake_images).view(-1)
             fake_loss = F.binary_cross_entropy_with_logits(fake_predictions, fake_labels)
 
             # Combined loss
             discriminator_loss = 0.5 * (real_loss + fake_loss)
-            discriminator_loss.backward()
+            discriminator_loss.backward(retain_graph=True)
 
             discriminator_optimizer.step()
 
@@ -124,7 +124,7 @@ def train_gan(
             # Discriminator loss on fake images with flipped labels
             fake_predictions = model.discriminator_forward(fake_images).view(-1)
             generator_loss = F.binary_cross_entropy_with_logits(fake_predictions, flipped_fake_labels)
-            generator_loss.backward()
+            generator_loss.backward(retain_graph=True)
 
             generator_optimizer.step()
 
